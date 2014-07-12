@@ -17,6 +17,7 @@
  *
  */
 using System;
+using System.Collections;
 using DOL.GS.PacketHandler;
 using DOL.Language;
 using DOL.GS.PlayerClass;
@@ -80,8 +81,7 @@ namespace DOL.GS.Trainer
         /// <returns></returns>
         public static bool CanPromotePlayer(GamePlayer player)
         {
-            return (player.Level >= 5 && player.CharacterClass.ID == (int)eCharacterClass.Mystic && (player.Race == (int)eRace.Dwarf || player.Race == (int)eRace.Frostalf
-                                                                                                    || player.Race == (int)eRace.Norseman || player.Race == (int)eRace.Kobold));
+            return (player.Level <= 5);
         }
 
         /// <summary>
@@ -101,6 +101,23 @@ namespace DOL.GS.Trainer
                     // promote player to other class
                     if (CanPromotePlayer(player))
                     {
+                        //Remove all skills and specs from player.
+                        player.RemoveAllSkills();
+                        player.RemoveAllSpellLines();
+                        player.RemoveAllSpecs();
+                        player.RemoveAllStyles();
+
+                        IList abilityList = player.GetAllAbilities();
+
+                        foreach (Ability a in abilityList)
+                        {
+                            if (a == null)
+                                continue;
+
+                            player.RemoveAbility(a.KeyName);
+                        }
+
+
                         PromotePlayer(player, ClassMattermancer.MATTERMANCER_CLASS_ID, "Welcome, yes, welcome! I'm sure you'll 'enjoy' your time with us, hehe....", null);
                         Emote(eEmote.Laugh);
                     }
