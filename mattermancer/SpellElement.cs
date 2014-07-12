@@ -48,7 +48,8 @@ namespace DOL.GS.Spells
         public SpellElement(GameLiving caster, Spell spell, SpellLine spellLine)
             : base(caster, spell, spellLine)
         {
-            m_procSpell = SkillBase.GetSpellByID((int)spell.Value);
+            m_procSpell = (Spell)SkillBase.GetSpellByID((int)spell.Value).Clone(); //need to clone so we may set level for resist purposes
+            m_procSpell.Level = spell.Level;
             if (m_procSpell != null)
                 log.Info("Proc spell found: " + m_procSpell.Name);
             else
@@ -76,6 +77,8 @@ namespace DOL.GS.Spells
             if (Util.Chance(chance))
             {
                 ISpellHandler handler = ScriptMgr.CreateSpellHandler((GameLiving)cargs.SpellHandler.Caster, m_procSpell, m_spellLine);
+
+                log.Info("Proc spell level, for resist purposes=" + m_procSpell.Level + " compared to elemental level of " + Spell.Level);
 
                 if (handler.HasPositiveEffect)
                 {

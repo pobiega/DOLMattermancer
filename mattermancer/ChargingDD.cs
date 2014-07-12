@@ -306,11 +306,14 @@ namespace DOL.GS.Spells
 
                         //If we have any spell elements, proc them.
                         SpellElement se = null; //have to do it this way incase we edit effectlist
-                        foreach (GameSpellEffect gse in Caster.EffectList)
+                        lock (Caster.EffectList)
                         {
-                            se = gse.SpellHandler as SpellElement;
-                            if (se != null)
-                                break;
+                            foreach (GameSpellEffect gse in Caster.EffectList)
+                            {
+                                se = gse.SpellHandler as SpellElement;
+                                if (se != null)
+                                    break;
+                            }
                         }
                         if (se != null)
                             se.TryToProc(new CastingEventArgs(this, m_target));
@@ -404,6 +407,75 @@ namespace DOL.GS.Spells
         }
 
         protected Spell m_untappedPotential;
+
+        #region Damage Variance scales with element spec
+
+        /// <summary>
+        /// Calculates min damage variance %
+        /// </summary>
+        /// <param name="target">spell target</param>
+        /// <param name="min">returns min variance</param>
+        /// <param name="max">returns max variance</param>
+        public virtual void CalculateDamageVariance(GameLiving target, out double min, out double max)
+        {
+            int speclevel = 1;
+
+            if (m_caster is GamePlayer)
+            {
+            SpellElement se = null; //have to do it this way incase we edit effectlist
+            lock (Caster.EffectList)
+            {
+                foreach (GameSpellEffect gse in Caster.EffectList)
+                {
+                    se = gse.SpellHandler as SpellElement;
+                    if (se != null)
+                        break;
+                }
+            }
+            if (se != null)
+                speclevel = ((GamePlayer)m_caster).GetModifiedSpecLevel(se.SpellLine.Spec);
+            }
+            min = 1.25;
+            max = 1.25;
+
+            if (target.Level > 0)
+            {
+                min = 0.25 + (speclevel - 1) / (double)target.Level;
+            }
+
+            if (speclevel - 1 > target.Level)
+            {
+                double overspecBonus = (speclevel - 1 - target.Level) * 0.005;
+                min += overspecBonus;
+                max += overspecBonus;
+            }
+
+            // add level mod
+            if (m_caster is GamePlayer)
+            {
+                min += GetLevelModFactor() * (m_caster.Level - target.Level);
+                max += GetLevelModFactor() * (m_caster.Level - target.Level);
+            }
+            else if (m_caster is GameNPC && ((GameNPC)m_caster).Brain is IControlledBrain)
+            {
+                //Get the root owner
+                GameLiving owner = ((IControlledBrain)((GameNPC)m_caster).Brain).GetLivingOwner();
+                if (owner != null)
+                {
+                    min += GetLevelModFactor() * (owner.Level - target.Level);
+                    max += GetLevelModFactor() * (owner.Level - target.Level);
+                }
+            }
+
+            if (max < 0.25)
+                max = 0.25;
+            if (min > max)
+                min = max;
+            if (min < 0)
+                min = 0;
+        }
+
+        #endregion
 
         // constructor
         public ChargingDD(GameLiving caster, Spell spell, SpellLine line)

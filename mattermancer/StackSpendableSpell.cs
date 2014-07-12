@@ -41,48 +41,12 @@ namespace DOL.GS.Spells
         public StackSpendableSpellHandler(GameLiving caster, Spell spell, SpellLine spellLine)
             : base(caster, spell, spellLine)
         {
-            m_procSpell = SkillBase.GetSpellByID((int)spell.Value);
+            m_procSpell = (Spell)SkillBase.GetSpellByID((int)spell.Value).Clone(); //need to clone so we may set level for resist purposes
+            m_procSpell.Level = spell.Level;
             if (m_procSpell != null)
                 log.Info("Proc spell found: " + m_procSpell.Name);
             else
                 log.Error("Could not find proc spell for Spell Element: " + spell.Name);
-        }
-
-        public virtual void TryToProc(CastingEventArgs cargs)
-        {
-            if (m_procSpell == null)
-                return;
-
-            ChargingDD cd = cargs.SpellHandler as ChargingDD;
-            if (cd == null)
-            {
-                //no affect on spells other than the charging DD
-                return;
-            }
-
-            // Calculate the chance to proc the spell. We lerp between the base chance and the maximum chance based on how charged the spell was.
-            double p = cd.GetChargePercent(); // m_procSpell.LifeDrainReturn * (1.0 - p) + p * 
-            log.Info("m_procSpell.LifeDrainReturn * (1.0 - p) + p * amnesiaChance:" + m_procSpell.LifeDrainReturn * (1.0 - p) + p * m_spell.AmnesiaChance);
-            int chance = (int)Math.Round(m_procSpell.LifeDrainReturn * (1.0 - p) + p * m_spell.AmnesiaChance);
-            log.Info("Mattermancer proc chance: " + chance + " for charge percent of " + p);
-
-            if (Util.Chance(chance))
-            {
-                ISpellHandler handler = ScriptMgr.CreateSpellHandler((GameLiving)cargs.SpellHandler.Caster, m_procSpell, m_spellLine);
-
-                if (handler.HasPositiveEffect)
-                {
-                    handler.StartSpell(cd.Caster);
-                }
-                else
-                {
-                    handler.StartSpell(cd.GetSpellTarget()); //to prevent a player from proccing the effect on a target other than the charging DD is cast on.
-                }
-
-            }
-            else
-                log.Info("Mattermancer spell did not proc.");
-
         }
 
         /// <summary>
@@ -106,11 +70,25 @@ namespace DOL.GS.Spells
             m_caster.Mana -= PowerCost(target);
 
             //Reduce untapped potential
-            UntappedPotentialEffect gs = FindEffectOnTarget(Caster, typeof(UntappedPotential)) as UntappedPotentialEffect;
-            if (gs != null)
+            UntappedPotentialEffect gs = null;
+            lock (Caster.EffectList)
             {
-                gs.DecreaseStackCount(Spell.LifeDrainReturn);
+                foreach (GameSpellEffect gse in Caster.EffectList)
+                    if (gse != null)
+                    {
+                        if (gse is UntappedPotentialEffect)
+                        {
+                            gs = (UntappedPotentialEffect)gse;
+                            break;
+                        }
+                    }
             }
+
+            if (gs != null)
+                gs.DecreaseStackCount(Spell.LifeDrainReturn);
+
+            ISpellHandler spellH = ScriptMgr.CreateSpellHandler(Caster, m_procSpell, m_spellLine);
+            spellH.StartSpell(target); //slightly inefficient - we have already checkedbegincast for this subspell. Nonetheless we need to launch the spell independently incase it has a cast time.
 
             base.FinishSpellCast(target);
         }
@@ -118,14 +96,27 @@ namespace DOL.GS.Spells
         public override bool CheckBeginCast(GameLiving selectedTarget)
         {
             //Check the caster has the correct number of stacks to cast the spell.
-            UntappedPotentialEffect gs = FindEffectOnTarget(Caster, typeof(UntappedPotential)) as UntappedPotentialEffect;
+            UntappedPotentialEffect gs = null;
+            lock (Caster.EffectList)
+            {
+                foreach (GameSpellEffect gse in Caster.EffectList)
+                    if (gse != null)
+                    {
+                        if (gse is UntappedPotentialEffect)
+                        {
+                            gs = (UntappedPotentialEffect)gse;
+                            break;
+                        }
+                    }
+            }
 
             if (gs == null)
             {
-                MessageToCaster("You do not have untapped potential.", eChatType.CT_SpellResisted);
+                log.Info("No untapped potential effect found on caster");
+                MessageToCaster("You do not have untapped potential. Cast Mattermancer spells to obtain untapped potential.", eChatType.CT_SpellResisted);
                 return false;
             } else {
-
+                log.Info("gs.StackCount=" + gs.StackCount);
                 if (gs.StackCount < Spell.LifeDrainReturn)
                 {
                     MessageToCaster("You do not have enough untapped potential.", eChatType.CT_SpellResisted);
@@ -133,7 +124,11 @@ namespace DOL.GS.Spells
                 }
             }
 
-            return base.CheckBeginCast(selectedTarget);
+
+
+            // Need to test the subspell can cast.
+            ISpellHandler spellH = ScriptMgr.CreateSpellHandler(Caster, m_procSpell, m_spellLine);
+            return spellH.CheckBeginCast(selectedTarget);
         }
 
         /// <summary>

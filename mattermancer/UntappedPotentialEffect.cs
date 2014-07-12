@@ -86,7 +86,7 @@ namespace DOL.GS.Effects
         public void DecreaseStackCount(int amount)
         {
             m_stackCount = m_stackCount - amount;
-
+            log.Info("Decreased stacks by " + amount + ", stack count at " + m_stackCount);
             if (m_stackCount < 1)
             {
                 Cancel(false);
@@ -127,10 +127,13 @@ namespace DOL.GS.Effects
             UntappedPotentialEffect upe = effect as UntappedPotentialEffect;
             if (upe == null)
                 return;
-
-            m_duration = effect.Duration;
+            
+            //StopTimers();
+            log.Info("Spellhandler.Spell.Duration = " + m_handler.Spell.Duration);
+            m_duration = m_handler.Spell.Duration;
             IncreaseStackCount(upe.StackCount);
             log.Info("Increased stack to " + StackCount + "!");
+            //m_handler.OnEffectStart(this);
         }        
     }
 }
