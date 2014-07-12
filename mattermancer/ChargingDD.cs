@@ -416,7 +416,7 @@ namespace DOL.GS.Spells
         /// <param name="target">spell target</param>
         /// <param name="min">returns min variance</param>
         /// <param name="max">returns max variance</param>
-        public virtual void CalculateDamageVariance(GameLiving target, out double min, out double max)
+        public override void CalculateDamageVariance(GameLiving target, out double min, out double max)
         {
             int speclevel = 1;
 
@@ -433,7 +433,10 @@ namespace DOL.GS.Spells
                 }
             }
             if (se != null)
+            {
+                log.Info("Using specline " + se.SpellLine.Spec + " for damage variance calculation.");
                 speclevel = ((GamePlayer)m_caster).GetModifiedSpecLevel(se.SpellLine.Spec);
+            }
             }
             min = 1.25;
             max = 1.25;
@@ -481,7 +484,7 @@ namespace DOL.GS.Spells
         /// Charging DD can possibly inherit the damage type of the caster's spell element, if a valid one exists.
         /// </summary>
         /// <returns></returns>
-        public virtual eDamageType DetermineSpellDamageType()
+        public override eDamageType DetermineSpellDamageType()
         {
             if (m_caster is GamePlayer)
             {
