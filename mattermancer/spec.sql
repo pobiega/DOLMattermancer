@@ -1,2 +1,0 @@
-INSERT INTO `specialization` (`Specialization_ID`, `KeyName`, `Name`, `Icon`, `Description`) VALUES ('mattermancerFire', 'Gift of Flame', 'Gift of Flame', 0, 'no');
-INSERT INTO `specialization` (`Specialization_ID`, `KeyName`, `Name`, `Icon`, `Description`) VALUES ('mattermancerEarth', 'Manipulate Earth', 'Manipulate Earth', 0, 'no');
