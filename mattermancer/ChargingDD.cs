@@ -146,7 +146,6 @@ namespace DOL.GS.Spells
             }
         }
 
-
         #region Handlers and Interrupt
 
         /// <summary>
@@ -315,6 +314,14 @@ namespace DOL.GS.Spells
                         }
                         if (se != null)
                             se.TryToProc(new CastingEventArgs(this, m_target));
+
+                        //Give a stack of untapped potential!
+                        if (m_untappedPotential != null)
+                        {
+                            log.Info("Casting untapped potential.");
+                            ISpellHandler handler = ScriptMgr.CreateSpellHandler(Caster, m_untappedPotential, SpellLine);
+                            handler.StartSpell(Caster);
+                        }
                     }
                     else
                     {
@@ -396,7 +403,13 @@ namespace DOL.GS.Spells
             }
         }
 
+        protected Spell m_untappedPotential;
+
         // constructor
-        public ChargingDD(GameLiving caster, Spell spell, SpellLine line) : base(caster, spell, line) { }
+        public ChargingDD(GameLiving caster, Spell spell, SpellLine line)
+            : base(caster, spell, line)
+        {
+            m_untappedPotential = SkillBase.GetSpellByID(UntappedPotential.UNTAPPED_POTENTIAL_SPELLID);
+        }
     }
 }

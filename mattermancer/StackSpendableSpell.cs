@@ -104,31 +104,42 @@ namespace DOL.GS.Spells
         public override void FinishSpellCast(GameLiving target)
         {
             m_caster.Mana -= PowerCost(target);
+
+            //Reduce untapped potential
+            GameSpellEffect gs = FindEffectOnTarget(Caster, typeof(UntappedPotential));
+             if (gs != null)
+            {
+                //(gs.SpellHandler as UntappedPotential).ReduceStackCount(Spell.LifeDrainReturn);
+            }
+
             base.FinishSpellCast(target);
         }
 
-        public override void OnEffectStart(GameSpellEffect effect)
+        public override bool CheckBeginCast(GameLiving selectedTarget)
         {
-            base.OnEffectStart(effect);
-            //GameEventMgr.AddHandler(effect.Owner, GameLivingEvent.CastFinished, new DOLEventHandler(EventHandler));
-        }
+            //Check the caster has the correct number of stacks to cast the spell.
+            GameSpellEffect gs = FindEffectOnTarget(Caster, typeof(UntappedPotential));
 
-        public override int OnEffectExpires(GameSpellEffect effect, bool noMessages)
-        {
-            //GameEventMgr.RemoveHandler(effect.Owner, GameLivingEvent.CastFinished, new DOLEventHandler(EventHandler));
-            return 0;
-        }
+            if (gs == null)
+            {
+                MessageToCaster("You do not have untapped potential.", eChatType.CT_SpellResisted);
+                return false;
+            } else {
+                UntappedPotential up = gs.SpellHandler as UntappedPotential;
+                if (up == null)
+                {
+                    MessageToCaster("You do not have untapped potential.", eChatType.CT_SpellResisted);
+                    return false;
+                }
 
+                if (false)//up.StackCount < Spell.LifeDrainReturn)
+                {
+                    MessageToCaster("You do not have enough untapped potential.", eChatType.CT_SpellResisted);
+                    return false;
+                }
+            }
 
-        public override bool IsNewEffectBetter(GameSpellEffect oldeffect, GameSpellEffect neweffect)
-        {
-            //Spell elements always overwrite whatever element the caster currently has active.
-            return oldeffect.Spell.ID != neweffect.Spell.ID;
-        }
-
-        public override bool IsOverwritable(GameSpellEffect compare)
-        {
-            return (compare.SpellHandler is SpellElement);
+            return base.CheckBeginCast(selectedTarget);
         }
 
         /// <summary>
@@ -141,8 +152,8 @@ namespace DOL.GS.Spells
                 var list = new List<string>();
                 list.Add(Spell.Description);
                 list.Add("");
-                list.Add("Elements are a way to imbue the magic of a Mattermancer with an additional effect. Charging the pulsed DD spell will increase the likelihood of the elemental effect.");
-                list.Add("Chance: " + Spell.LifeDrainReturn + "% to " + Spell.AmnesiaChance + "%.");
+                list.Add("The chaotic power of the Mattermancer can tap into an enormous well of energy. With each cast of the charging DD spell, the Mattermancer receives a stack of Untapped Potential. Some magicks require the use of this quantity.");
+                list.Add("Stacks consumed: " + Spell.LifeDrainReturn);
                 list.Add("");
                 if (Spell.Duration >= ushort.MaxValue * 1000)
                     list.Add(LanguageMgr.GetTranslation((Caster as GamePlayer).Client, "DelveInfo.Duration") + " Permanent.");
@@ -156,7 +167,6 @@ namespace DOL.GS.Spells
                 if (Spell.RecastDelay > 60000) list.Add("Recast time: " + (Spell.RecastDelay / 60000).ToString() + ":" + (Spell.RecastDelay % 60000 / 1000).ToString("00") + " min");
                 else if (Spell.RecastDelay > 0) list.Add("Recast time: " + (Spell.RecastDelay / 1000).ToString() + " sec");
                 if (Spell.Concentration != 0) list.Add("Concentration cost: " + Spell.Concentration);
-                if (Spell.Radius != 0) list.Add("Radius: " + Spell.Radius);
 
                 // Recursion check
                 byte nextDelveDepth = (byte)(DelveInfoDepth + 1);
