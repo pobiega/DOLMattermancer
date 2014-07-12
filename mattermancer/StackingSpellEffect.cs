@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace DOL.GS.Effects
 {
-    public class StackingDoTSpellEffect : GameSpellEffect
+    public class StackingSpellEffect : GameSpellEffect
     {
         /// <summary>
         /// Defines a logger for this class.
@@ -22,7 +22,7 @@ namespace DOL.GS.Effects
 
         private readonly object m_LockObject = new object(); // dummy object for thread sync - Mannen
 
-        public StackingDoTSpellEffect(ISpellHandler handler, int duration, int pulseFreq, double effectiveness)
+        public StackingSpellEffect(ISpellHandler handler, int duration, int pulseFreq, double effectiveness)
             : base(handler,duration,pulseFreq,effectiveness)
         {
         }
@@ -33,7 +33,7 @@ namespace DOL.GS.Effects
 		/// <param name="handler">the spell handler</param>
 		/// <param name="duration">the spell duration in milliseconds</param>
 		/// <param name="pulseFreq">the pulse frequency in milliseconds</param>
-        public StackingDoTSpellEffect(ISpellHandler handler, int duration, int pulseFreq)
+        public StackingSpellEffect(ISpellHandler handler, int duration, int pulseFreq)
             : this(handler, duration, pulseFreq, 1)
 		{
 		}
@@ -42,7 +42,7 @@ namespace DOL.GS.Effects
 
         public override void Overwrite(GameSpellEffect effect)
         {
-            StackingDoTSpellEffect sdotEffect = effect as StackingDoTSpellEffect;
+            StackingSpellEffect sdotEffect = effect as StackingSpellEffect;
             if (sdotEffect == null)
                 return;
 

@@ -32,7 +32,7 @@ namespace DOL.GS.Spells
 
         protected override GameSpellEffect CreateSpellEffect(GameLiving target, double effectiveness)
         {
-            return new StackingDoTSpellEffect(this, m_spell.Duration, m_spell.Frequency, effectiveness);
+            return new StackingSpellEffect(this, m_spell.Duration, m_spell.Frequency, effectiveness);
         }
 
         public override AttackData CalculateDamageToTarget(GameLiving target, double effectiveness)
