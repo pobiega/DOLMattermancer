@@ -86,7 +86,7 @@ namespace DOL.GS.Effects
         public void DecreaseStackCount(int amount)
         {
             m_stackCount = m_stackCount - amount;
-            log.Info("Decreased stacks by " + amount + ", stack count at " + m_stackCount);
+            //log.Info("Decreased stacks by " + amount + ", stack count at " + m_stackCount);
             if (m_stackCount < 1)
             {
                 Cancel(false);
@@ -129,9 +129,9 @@ namespace DOL.GS.Effects
                 return;
             
             StopTimers();
-            log.Info("Spellhandler.Spell.Duration = " + m_handler.Spell.Duration);
+            //log.Info("Spellhandler.Spell.Duration = " + m_handler.Spell.Duration);
             m_duration = m_handler.Spell.Duration;
-            log.Info("Increased stack to " + StackCount + "!");
+            //log.Info("Increased stack to " + StackCount + "!");
             StartTimers();
             m_expired = false;
             IncreaseStackCount(upe.StackCount);
