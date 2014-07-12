@@ -114,11 +114,11 @@ namespace DOL.GS.Spells
 
             if (gs == null)
             {
-                log.Info("No untapped potential effect found on caster");
+                //log.Info("No untapped potential effect found on caster");
                 MessageToCaster("You do not have untapped potential. Cast Mattermancer spells to obtain untapped potential.", eChatType.CT_SpellResisted);
                 return false;
             } else {
-                log.Info("gs.StackCount=" + gs.StackCount);
+                //log.Info("gs.StackCount=" + gs.StackCount);
                 if (gs.StackCount < Spell.LifeDrainReturn)
                 {
                     MessageToCaster("You do not have enough untapped potential.", eChatType.CT_SpellResisted);
