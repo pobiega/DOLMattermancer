@@ -43,9 +43,21 @@ namespace DOL.GS.Effects
                     case 4: return 13029;
                     case 5: return 13030;
                     case 6: return 13031;
-                    case 7: return 13032;
+                    case 7: return 13033;
                     case 8: return 13033;
                 }
+            }
+        }
+
+        public override IList<string> DelveInfo
+        {
+            get
+            {
+                List<string> list = new List<string>();
+                list.Add(Spell.Description);
+                list.Add(" ");
+                list.Add("'Untapped Potential' stacks: " + StackCount);
+                return list;
             }
         }
 
@@ -71,7 +83,7 @@ namespace DOL.GS.Effects
         /// Reduces number of UP stacks
         /// </summary>
         /// <param name="amount"></param>
-        public void ReduceStackCount(int amount)
+        public void DecreaseStackCount(int amount)
         {
             m_stackCount = m_stackCount - amount;
 
@@ -116,7 +128,9 @@ namespace DOL.GS.Effects
             if (upe == null)
                 return;
 
+            m_duration = effect.Duration;
             IncreaseStackCount(upe.StackCount);
-        }
+            log.Info("Increased stack to " + StackCount + "!");
+        }        
     }
 }

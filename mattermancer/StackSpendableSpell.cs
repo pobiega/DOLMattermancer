@@ -33,7 +33,7 @@ namespace DOL.GS.Spells
     /// <summary>
     /// Launches a sub spell but costs stacks of untapped potential
     /// </summary>
-    [SpellHandlerAttribute("Stack Spendable")]
+    [SpellHandlerAttribute("Untapped Potential Spell")]
     public class StackSpendableSpellHandler : SpellHandler
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -106,10 +106,10 @@ namespace DOL.GS.Spells
             m_caster.Mana -= PowerCost(target);
 
             //Reduce untapped potential
-            GameSpellEffect gs = FindEffectOnTarget(Caster, typeof(UntappedPotential));
-             if (gs != null)
+            UntappedPotentialEffect gs = FindEffectOnTarget(Caster, typeof(UntappedPotential)) as UntappedPotentialEffect;
+            if (gs != null)
             {
-                //(gs.SpellHandler as UntappedPotential).ReduceStackCount(Spell.LifeDrainReturn);
+                gs.DecreaseStackCount(Spell.LifeDrainReturn);
             }
 
             base.FinishSpellCast(target);
@@ -118,21 +118,15 @@ namespace DOL.GS.Spells
         public override bool CheckBeginCast(GameLiving selectedTarget)
         {
             //Check the caster has the correct number of stacks to cast the spell.
-            GameSpellEffect gs = FindEffectOnTarget(Caster, typeof(UntappedPotential));
+            UntappedPotentialEffect gs = FindEffectOnTarget(Caster, typeof(UntappedPotential)) as UntappedPotentialEffect;
 
             if (gs == null)
             {
                 MessageToCaster("You do not have untapped potential.", eChatType.CT_SpellResisted);
                 return false;
             } else {
-                UntappedPotential up = gs.SpellHandler as UntappedPotential;
-                if (up == null)
-                {
-                    MessageToCaster("You do not have untapped potential.", eChatType.CT_SpellResisted);
-                    return false;
-                }
 
-                if (false)//up.StackCount < Spell.LifeDrainReturn)
+                if (gs.StackCount < Spell.LifeDrainReturn)
                 {
                     MessageToCaster("You do not have enough untapped potential.", eChatType.CT_SpellResisted);
                     return false;
