@@ -154,6 +154,19 @@ namespace DOL.GS.Spells
                 list.Add("Elements are a way to imbue the magic of a Mattermancer with an additional effect. Charging the pulsed DD spell will increase the likelihood of the elemental effect.");
                 list.Add("Chance: " + Spell.LifeDrainReturn + "% to " + Spell.AmnesiaChance + "%.");
                 list.Add("");
+                if (Spell.DamageType != 0)
+                {
+                    GamePlayer p = null;
+
+                    if (Caster is GamePlayer || Caster is GameNPC && (Caster as GameNPC).Brain is IControlledBrain &&
+                    ((Caster as GameNPC).Brain as IControlledBrain).GetPlayerOwner() != null)
+                    {
+                        p = Caster is GamePlayer ? (Caster as GamePlayer) : ((Caster as GameNPC).Brain as IControlledBrain).GetPlayerOwner();
+                    }
+
+                    list.Add("This element imbues your charging DD with a certain damage type.");
+                    list.Add(p != null ? LanguageMgr.GetTranslation(p.Client, "DelveInfo.Damage", GlobalConstants.DamageTypeToName(Spell.DamageType)) : LanguageMgr.GetTranslation(ServerProperties.Properties.SERV_LANGUAGE, "DelveInfo.Damage", GlobalConstants.DamageTypeToName(Spell.DamageType)));
+                }
                 if (Spell.Duration >= ushort.MaxValue * 1000)
                     list.Add(LanguageMgr.GetTranslation((Caster as GamePlayer).Client, "DelveInfo.Duration") + " Permanent.");
 

@@ -477,6 +477,30 @@ namespace DOL.GS.Spells
 
         #endregion
 
+        /// <summary>
+        /// Charging DD can possibly inherit the damage type of the caster's spell element, if a valid one exists.
+        /// </summary>
+        /// <returns></returns>
+        public virtual eDamageType DetermineSpellDamageType()
+        {
+            if (m_caster is GamePlayer)
+            {
+                SpellElement se = null; //have to do it this way incase we edit effectlist
+                lock (Caster.EffectList)
+                {
+                    foreach (GameSpellEffect gse in Caster.EffectList)
+                    {
+                        se = gse.SpellHandler as SpellElement;
+                        if (se != null)
+                            break;
+                    }
+                }
+                if (se != null && se.Spell.DamageType != 0)
+                    return se.Spell.DamageType;
+            }
+            return Spell.DamageType;
+        }
+
         // constructor
         public ChargingDD(GameLiving caster, Spell spell, SpellLine line)
             : base(caster, spell, line)

@@ -41,8 +41,12 @@ namespace DOL.GS.Spells
         public StackSpendableSpellHandler(GameLiving caster, Spell spell, SpellLine spellLine)
             : base(caster, spell, spellLine)
         {
-            m_procSpell = (Spell)SkillBase.GetSpellByID((int)spell.Value).Clone(); //need to clone so we may set level for resist purposes
-            m_procSpell.Level = spell.Level;
+            m_procSpell = SkillBase.GetSpellByID((int)spell.Value); //need to clone so we may set level for resist purposes
+            if (m_procSpell != null)
+            {
+                m_procSpell = (Spell)m_procSpell.Clone(); //need to clone so we may set level for resist purposes
+                m_procSpell.Level = spell.Level;
+            }
             if (m_procSpell != null)
                 log.Info("Proc spell found: " + m_procSpell.Name);
             else
