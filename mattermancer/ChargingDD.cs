@@ -321,7 +321,7 @@ namespace DOL.GS.Spells
                         //Give a stack of untapped potential!
                         if (m_untappedPotential != null)
                         {
-                            log.Info("Casting untapped potential.");
+                            //log.Info("Casting untapped potential.");
                             ISpellHandler handler = ScriptMgr.CreateSpellHandler(Caster, m_untappedPotential, SpellLine);
                             handler.StartSpell(Caster);
                         }
@@ -434,7 +434,7 @@ namespace DOL.GS.Spells
             }
             if (se != null)
             {
-                log.Info("Using specline " + se.SpellLine.Spec + " for damage variance calculation.");
+                //log.Info("Using specline " + se.SpellLine.Spec + " for damage variance calculation.");
                 speclevel = ((GamePlayer)m_caster).GetModifiedSpecLevel(se.SpellLine.Spec);
             }
             }

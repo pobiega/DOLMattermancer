@@ -50,9 +50,7 @@ namespace DOL.GS.Spells
         {
             m_procSpell = (Spell)SkillBase.GetSpellByID((int)spell.Value).Clone(); //need to clone so we may set level for resist purposes
             m_procSpell.Level = spell.Level;
-            if (m_procSpell != null)
-                log.Info("Proc spell found: " + m_procSpell.Name);
-            else
+            if (m_procSpell == null)
                 log.Error("Could not find proc spell for Spell Element: " + spell.Name);
         }
 
@@ -70,15 +68,15 @@ namespace DOL.GS.Spells
 
             // Calculate the chance to proc the spell. We lerp between the base chance and the maximum chance based on how charged the spell was.
             double p = cd.GetChargePercent(); // m_procSpell.LifeDrainReturn * (1.0 - p) + p * 
-            log.Info("m_procSpell.LifeDrainReturn * (1.0 - p) + p * amnesiaChance:" + m_procSpell.LifeDrainReturn * (1.0 - p) + p * m_spell.AmnesiaChance);
+            //log.Info("m_procSpell.LifeDrainReturn * (1.0 - p) + p * amnesiaChance:" + m_procSpell.LifeDrainReturn * (1.0 - p) + p * m_spell.AmnesiaChance);
             int chance = (int)Math.Round(m_procSpell.LifeDrainReturn * (1.0 - p) + p * m_spell.AmnesiaChance);
-            log.Info("Mattermancer proc chance: " + chance + " for charge percent of " + p );
+            //log.Info("Mattermancer proc chance: " + chance + " for charge percent of " + p );
 
             if (Util.Chance(chance))
             {
                 ISpellHandler handler = ScriptMgr.CreateSpellHandler((GameLiving)cargs.SpellHandler.Caster, m_procSpell, m_spellLine);
 
-                log.Info("Proc spell level, for resist purposes=" + m_procSpell.Level + " compared to elemental level of " + Spell.Level);
+                //log.Info("Proc spell level, for resist purposes=" + m_procSpell.Level + " compared to elemental level of " + Spell.Level);
 
                 if (handler.HasPositiveEffect)
                 {
@@ -90,8 +88,8 @@ namespace DOL.GS.Spells
                 }
 
             }
-            else
-                log.Info("Mattermancer spell did not proc.");
+            //else
+            //    log.Info("Mattermancer spell did not proc.");
 
         }
 
