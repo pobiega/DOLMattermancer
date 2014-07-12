@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 
-using DOL.Database;
 using DOL.GS.Spells;
-using DOL.GS.PacketHandler;
-using DOL.Language;
 
 using log4net;
-using System.Collections.Generic;
 
 namespace DOL.GS.Effects
 {
@@ -62,6 +55,14 @@ namespace DOL.GS.Effects
                 StackingDoTSpellHandler sdotHandler = m_handler as StackingDoTSpellHandler;
                 if (sdotHandler == null)
                     return;
+
+                // new effect is more powerful than the old one, transfer the stack count to the new handler and overwrite it.
+                if(sdotEffect.SpellHandler.Spell.Level > sdotHandler.Spell.Level)
+                {
+                    StackingDoTSpellHandler newHandler = sdotEffect.SpellHandler as StackingDoTSpellHandler;
+                    newHandler.StackCount = sdotHandler.StackCount;
+                    m_handler = newHandler;
+                }
                 
                 sdotHandler.StackCount++;
 
