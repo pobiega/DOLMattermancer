@@ -13,6 +13,15 @@ INSERT INTO `linexspell` (`LineName`, `packageID`, `SpellID`, `Level`, `LineXSpe
 INSERT INTO `linexspell` (`LineName`, `packageID`, `SpellID`, `Level`, `LineXSpell_ID`) VALUES ('Gift of Flame', 'Mattermancer', 90044, 12, '3ba84ee5-09dd-11e4-931b-6cf049edc9ce');
 INSERT INTO `linexspell` (`LineName`, `packageID`, `SpellID`, `Level`, `LineXSpell_ID`) VALUES ('Gift of Flame', 'Mattermancer', 90043, 7, '3ba8503f-09dd-11e4-931b-6cf049edc9ce');
 INSERT INTO `linexspell` (`LineName`, `packageID`, `SpellID`, `Level`, `LineXSpell_ID`) VALUES ('Gift of Flame', 'Mattermancer', 90047, 32, '3ba8519a-09dd-11e4-931b-6cf049edc9ce');
+INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`, `PackageID`) VALUES ('Gift of Flame', 90301, 4, 'af0efbce-09e8-11e4-8724-002637bd3942', 'Mattermancer');
+INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`, `PackageID`) VALUES ('Gift of Flame', 90302, 8, 'af0ee81a-09e8-11e4-8724-002637bd3942', 'Mattermancer');
+INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`, `PackageID`) VALUES ('Gift of Flame', 90303, 10, 'af0f06b1-09e8-11e4-8724-002637bd3942', 'Mattermancer');
+INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`, `PackageID`) VALUES ('Gift of Flame', 90304, 13, 'af0f074a-09e8-11e4-8724-002637bd3942', 'Mattermancer');
+INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`, `PackageID`) VALUES ('Gift of Flame', 90305, 17, 'af0f060a-09e8-11e4-8724-002637bd3942', 'Mattermancer');
+INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`, `PackageID`) VALUES ('Gift of Flame', 90306, 23, 'af0f0878-09e8-11e4-8724-002637bd3942', 'Mattermancer');
+INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`, `PackageID`) VALUES ('Gift of Flame', 90307, 30, 'af0f0a40-09e8-11e4-8724-002637bd3942', 'Mattermancer');
+INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`, `PackageID`) VALUES ('Gift of Flame', 90308, 37, 'af0eff52-09e8-11e4-8724-002637bd3942', 'Mattermancer');
+INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`, `PackageID`) VALUES ('Gift of Flame', 90309, 47, 'af0efa7f-09e8-11e4-8724-002637bd3942', 'Mattermancer');
 INSERT INTO `linexspell` (`LineName`, `packageID`, `SpellID`, `Level`, `LineXSpell_ID`) VALUES ('Manipulate Earth', 'Mattermancer', 90136, 33, '3ba37778-09dd-11e4-931b-6cf049edc9ce');
 INSERT INTO `linexspell` (`LineName`, `packageID`, `SpellID`, `Level`, `LineXSpell_ID`) VALUES ('Manipulate Earth', 'Mattermancer', 90117, 9, '3ba37a57-09dd-11e4-931b-6cf049edc9ce');
 INSERT INTO `linexspell` (`LineName`, `packageID`, `SpellID`, `Level`, `LineXSpell_ID`) VALUES ('Manipulate Earth', 'Mattermancer', 90116, 6, '3ba37e74-09dd-11e4-931b-6cf049edc9ce');
