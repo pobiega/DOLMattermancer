@@ -121,7 +121,9 @@ INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`) VALUE
 	('Mattermancery', 90108, 20, 'a23c9eb3-0a26-11e4-8724-002637bd3942'),
 	('Mattermancery', 90109, 26, 'a23c9f47-0a26-11e4-8724-002637bd3942'),
 	('Mattermancery', 90111, 43, 'a23c9fdb-0a26-11e4-8724-002637bd3942'),
-	('Gift of Flame', 90300, 1, 'a23ca06c-0a26-11e4-8724-002637bd3942');
+	('Gift of Flame', 90300, 1, 'a23ca06c-0a26-11e4-8724-002637bd3942'),
+	('Mattermancery', 90027, 21, 'mattermancerUIUP2'),
+	('Mattermancery', 90026, 11, 'mattermancerUIUP1');
 /*!40000 ALTER TABLE `linexspell` ENABLE KEYS */;
 
 -- Dumping data for table dol.npctemplate: ~1 rows (approximately)
@@ -332,7 +334,10 @@ INSERT INTO `spell` (`SpellID`, `ClientEffect`, `Icon`, `Name`, `Description`, `
 	(90326, 0, 307, 'Word: Minor Flames', 'Set your target on fire with a stacking damage over time effect.', 'Enemy', 1500, 0, 0, 0, 0, 'Untapped Potential Spell', 0, 0, 0, 0, 0, 0, 0, 0, 90316, 0, 2, 0, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 'Mattermancer', 'ac4c6985-0a10-11e4-931b-6cf049edc9ce'),
 	(90327, 0, 308, 'Word: Flames', 'Set your target on fire with a stacking damage over time effect.', 'Enemy', 1500, 0, 0, 0, 0, 'Untapped Potential Spell', 0, 0, 0, 0, 0, 0, 0, 0, 90317, 0, 2, 0, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 'Mattermancer', 'ac4c6b0e-0a10-11e4-931b-6cf049edc9ce'),
 	(90328, 0, 309, 'Word: Major Flames', 'Set your target on fire with a stacking damage over time effect.', 'Enemy', 1500, 0, 0, 0, 0, 'Untapped Potential Spell', 0, 0, 0, 0, 0, 0, 0, 0, 90318, 0, 2, 0, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 'Mattermancer', 'ac4c6c97-0a10-11e4-931b-6cf049edc9ce'),
-	(90329, 0, 310, 'Word: Incineration', 'Set your target on fire with a stacking damage over time effect.', 'Enemy', 1500, 0, 0, 0, 0, 'Untapped Potential Spell', 0, 0, 0, 0, 0, 0, 0, 0, 90319, 0, 2, 0, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 'Mattermancer', 'ac4c6e1f-0a10-11e4-931b-6cf049edc9ce');
+	(90329, 0, 310, 'Word: Incineration', 'Set your target on fire with a stacking damage over time effect.', 'Enemy', 1500, 0, 0, 0, 0, 'Untapped Potential Spell', 0, 0, 0, 0, 0, 0, 0, 0, 90319, 0, 2, 0, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 'Mattermancer', 'ac4c6e1f-0a10-11e4-931b-6cf049edc9ce'),
+	(90026, 13027, 13027, 'Untapped Potential', 'Harness your Untapped Potential.', 'Self', 0, 0, 2, 2, 0, 'Untapped Potential', 30, 0, 0, 0, 0, 30, 0, 0, 3, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 9825, 'Mattermancer', NULL),
+	(90027, 13028, 13028, 'Untapped Potential', 'Harness your Untapped Potential.', 'Self', 0, 0, 2, 3, 0, 'Untapped Potential', 30, 0, 0, 0, 0, 30, 0, 0, 3, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 9825, 'Mattermancer', NULL);
+	
 /*!40000 ALTER TABLE `spell` ENABLE KEYS */;
 
 -- Dumping data for table dol.spellline: ~4 rows (approximately)
