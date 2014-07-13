@@ -244,7 +244,10 @@ namespace DOL.GS.Spells
             }
             //incase of >3
             if (con > 3)
-                chance = 20;
+                chance = 0;
+
+            if (con < -2)
+                chance = 100;
 
             if (Util.Chance(chance))
                 InterruptCharging();
