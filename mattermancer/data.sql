@@ -16,13 +16,11 @@ INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`) VALUE
 	('Mattermancery', 90105, 8, 'a23bd837-0a26-11e4-8724-002637bd3942'),
 	('Mattermancery', 90102, 2, 'a23bd94f-0a26-11e4-8724-002637bd3942'),
 	('Mattermancery', 90107, 15, 'a23bda0b-0a26-11e4-8724-002637bd3942'),
-	('Manipulate Earth', 90192, 31, 'a23bdab7-0a26-11e4-8724-002637bd3942'),
 	('Manipulate Earth', 90136, 33, 'a23bdb6c-0a26-11e4-8724-002637bd3942'),
 	('Manipulate Earth', 90117, 9, 'a23bdc18-0a26-11e4-8724-002637bd3942'),
 	('Manipulate Earth', 90116, 6, 'a23bdcfd-0a26-11e4-8724-002637bd3942'),
 	('Manipulate Earth', 90130, 1, 'a23bdda6-0a26-11e4-8724-002637bd3942'),
 	('Manipulate Earth', 90132, 11, 'a23bde52-0a26-11e4-8724-002637bd3942'),
-	('Manipulate Earth', 90118, 13, 'a23bdeec-0a26-11e4-8724-002637bd3942'),
 	('Manipulate Earth', 90131, 5, 'a23bdf7d-0a26-11e4-8724-002637bd3942'),
 	('Manipulate Earth', 90134, 17, 'a23be03e-0a26-11e4-8724-002637bd3942'),
 	('Manipulate Earth', 90137, 45, 'a23be115-0a26-11e4-8724-002637bd3942'),
@@ -42,11 +40,6 @@ INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`) VALUE
 	('Manipulate Earth', 90098, 50, 'a23c56ea-0a26-11e4-8724-002637bd3942'),
 	('Manipulate Earth', 90097, 42, 'a23c577e-0a26-11e4-8724-002637bd3942'),
 	('Manipulate Earth', 90188, 2, 'a23c581b-0a26-11e4-8724-002637bd3942'),
-	('Manipulate Earth', 90194, 48, 'a23c58b1-0a26-11e4-8724-002637bd3942'),
-	('Manipulate Earth', 90189, 7, 'a23c5945-0a26-11e4-8724-002637bd3942'),
-	('Manipulate Earth', 90190, 12, 'a23c59d6-0a26-11e4-8724-002637bd3942'),
-	('Manipulate Earth', 90193, 40, 'a23c5a70-0a26-11e4-8724-002637bd3942'),
-	('Manipulate Earth', 90191, 20, 'a23c5b13-0a26-11e4-8724-002637bd3942'),
 	('Air Manipulation', 90187, 47, 'a23c5ba7-0a26-11e4-8724-002637bd3942'),
 	('Air Manipulation', 90184, 23, 'a23c5c4a-0a26-11e4-8724-002637bd3942'),
 	('Air Manipulation', 90185, 27, 'a23c5cea-0a26-11e4-8724-002637bd3942'),
@@ -123,7 +116,14 @@ INSERT INTO `linexspell` (`LineName`, `SpellID`, `Level`, `LineXSpell_ID`) VALUE
 	('Mattermancery', 90111, 43, 'a23c9fdb-0a26-11e4-8724-002637bd3942'),
 	('Gift of Flame', 90300, 1, 'a23ca06c-0a26-11e4-8724-002637bd3942'),
 	('Mattermancery', 90027, 21, 'mattermancerUIUP2'),
-	('Mattermancery', 90026, 11, 'mattermancerUIUP1');
+	('Mattermancery', 90026, 11, 'mattermancerUIUP1'),
+	('Manipulate Earth', 'Mattermancer', 90224, 8, 'mattermancerUIDD5'),
+	('Manipulate Earth', 'Mattermancer', 90225, 15, 'mattermancerUIDD6'),
+	('Manipulate Earth', 'Mattermancer', 90226, 20, 'mattermancerUIDD7'),
+	('Manipulate Earth', 'Mattermancer', 90227, 26, 'mattermancerUIDD8'),
+	('Manipulate Earth', 'Mattermancer', 90228, 33, 'mattermancerUIDD9'),
+	('Manipulate Earth', 'Mattermancer', 90229, 43, 'mattermancerUIDD10'),
+	('Manipulate Earth', 'Mattermancer', 90230, 49, 'mattermancerUIDD11');
 /*!40000 ALTER TABLE `linexspell` ENABLE KEYS */;
 
 -- Dumping data for table dol.npctemplate: ~1 rows (approximately)
@@ -334,9 +334,25 @@ INSERT INTO `spell` (`SpellID`, `ClientEffect`, `Icon`, `Name`, `Description`, `
 	(90326, 0, 307, 'Word: Minor Flames', 'Set your target on fire with a stacking damage over time effect.', 'Enemy', 1500, 0, 0, 0, 0, 'Untapped Potential Spell', 0, 0, 0, 0, 0, 0, 0, 0, 90316, 0, 2, 0, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 'Mattermancer', 'ac4c6985-0a10-11e4-931b-6cf049edc9ce'),
 	(90327, 0, 308, 'Word: Flames', 'Set your target on fire with a stacking damage over time effect.', 'Enemy', 1500, 0, 0, 0, 0, 'Untapped Potential Spell', 0, 0, 0, 0, 0, 0, 0, 0, 90317, 0, 2, 0, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 'Mattermancer', 'ac4c6b0e-0a10-11e4-931b-6cf049edc9ce'),
 	(90328, 0, 309, 'Word: Major Flames', 'Set your target on fire with a stacking damage over time effect.', 'Enemy', 1500, 0, 0, 0, 0, 'Untapped Potential Spell', 0, 0, 0, 0, 0, 0, 0, 0, 90318, 0, 2, 0, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 'Mattermancer', 'ac4c6c97-0a10-11e4-931b-6cf049edc9ce'),
-	(90329, 0, 310, 'Word: Incineration', 'Set your target on fire with a stacking damage over time effect.', 'Enemy', 1500, 0, 0, 0, 0, 'Untapped Potential Spell', 0, 0, 0, 0, 0, 0, 0, 0, 90319, 0, 2, 0, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 'Mattermancer', 'ac4c6e1f-0a10-11e4-931b-6cf049edc9ce'),
-	(90026, 13027, 13027, 'Untapped Potential', 'Harness your Untapped Potential.', 'Self', 0, 0, 2, 2, 0, 'Untapped Potential', 30, 0, 0, 0, 0, 30, 0, 0, 3, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 9825, 'Mattermancer', NULL),
-	(90027, 13028, 13028, 'Untapped Potential', 'Harness your Untapped Potential.', 'Self', 0, 0, 2, 3, 0, 'Untapped Potential', 30, 0, 0, 0, 0, 30, 0, 0, 3, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 9825, 'Mattermancer', NULL);
+	(90329, 0, 310, 'Word: Incineration', 'Set your target on fire with a stacking damage over time effect.', 'Enemy', 1500, 0, 0, 0, 0, 'Untapped Potential Spell', 0, 0, 0, 0, 0, 0, 0, 0, 90319, 0, 2, 0, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 'Mattermancer', 'ac4c6e1f-0a10-11e4-931b-6cf049edc9ce');
+	
+INSERT INTO `spell` (`Spell_ID`, `SpellID`, `ClientEffect`, `Icon`, `Name`, `Description`, `Target`, `Range`, `Power`, `CastTime`, `Damage`, `DamageType`, `Type`, `Duration`, `Frequency`, `Pulse`, `PulsePower`, `Radius`, `RecastDelay`, `ResurrectHealth`, `ResurrectMana`, `Value`, `Concentration`, `LifeDrainReturn`, `AmnesiaChance`, `Message1`, `Message2`, `Message3`, `Message4`, `InstrumentRequirement`, `SpellGroup`, `EffectGroup`, `SubSpellID`, `MoveCast`, `Uninterruptible`, `IsPrimary`, `IsSecondary`, `AllowBolt`, `SharedTimerGroup`, `PackageID`, `IsFocus`) VALUES
+('UIchargingDD1', 90220, 12001, 12001, 'Solid Strike', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 7, 14, 'ChargingDD', 0, 10, 0, 1, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0),
+('UIchargingDD2', 90221, 12002, 12002, 'Steady Strike', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 10, 14, 'ChargingDD', 0, 10, 0, 1, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0),
+('UIchargingDD3', 90222, 12003, 12003, 'Anchored Strike', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 16, 14, 'ChargingDD', 0, 10, 0, 2, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0),
+('UIchargingDD4', 90223, 12004, 12004, 'Solid Blast', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 27, 14, 'ChargingDD', 0, 10, 0, 2, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0),
+('UIchargingDD5', 90224, 12005, 12005, 'Steady Blast', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 36, 14, 'ChargingDD', 0, 10, 0, 3, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0),
+('UIchargingDD6', 90225, 12006, 12006, 'Anchored Blast', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 45.6, 14, 'ChargingDD', 0, 10, 0, 3, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0),
+('UIchargingDD7', 90226, 12007, 12007, 'Solid Force', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 58.5, 14, 'ChargingDD', 0, 10, 0, 4, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0),
+('UIchargingDD8', 90227, 12008, 12008, 'Steady Force', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 76.8, 14, 'ChargingDD', 0, 10, 0, 5, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0),
+('UIchargingDD9', 90228, 12009, 12009, 'Anchored Force', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 96, 14, 'ChargingDD', 0, 10, 0, 6, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0),
+('UIchargingDD10', 90229, 12010, 12010, 'Unshakable Force', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 124, 14, 'ChargingDD', 0, 10, 0, 7, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0),
+('UIchargingDD11', 90230, 12011, 12011, 'Unbreakable Force', 'Damages the target. After casting the spell, the caster may allow it to charge; releasing a charged spell results in more damage, and a higher chance to cast secondary elemental effects. Damage calculation uses the elemental spell\'s specialisation. Cannot be interrupted until charging.', 'Enemy', 1500, -7, 3.2, 144, 14, 'ChargingDD', 0, 10, 0, 8, 0, 0, 0, 0, 1.5, 0, 250, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Mattermancer', 0);
+	
+INSERT INTO `spell` (`Spell_ID`, `SpellID`, `ClientEffect`, `Icon`, `Name`, `Description`, `Target`, `Range`, `Power`, `CastTime`, `Damage`, `DamageType`, `Type`, `Duration`, `Frequency`, `Pulse`, `PulsePower`, `Radius`, `RecastDelay`, `ResurrectHealth`, `ResurrectMana`, `Value`, `Concentration`, `LifeDrainReturn`, `AmnesiaChance`, `Message1`, `Message2`, `Message3`, `Message4`, `InstrumentRequirement`, `SpellGroup`, `EffectGroup`, `SubSpellID`, `MoveCast`, `Uninterruptible`, `IsPrimary`, `IsSecondary`, `AllowBolt`, `SharedTimerGroup`, `PackageID`, `IsFocus`) VALUES 
+('untappedPotential1', 90026, 13027, 13027, 'Untapped Potential', 'Harness your Untapped Potential.', 'Self', 0, 0, 2, 2, 0, 'Untapped Potential', 30, 0, 0, 0, 0, 30, 0, 0, 3, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 9825, 'Mattermancer', NULL),
+('untappedPotential2', 90027, 13028, 13028, 'Untapped Potential', 'Harness your Untapped Potential.', 'Self', 0, 0, 2, 3, 0, 'Untapped Potential', 30, 0, 0, 0, 0, 30, 0, 0, 3, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 9825, 'Mattermancer', NULL);
+
 	
 /*!40000 ALTER TABLE `spell` ENABLE KEYS */;
 
