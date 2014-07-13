@@ -68,8 +68,6 @@ namespace DOL.GS.PlayerClass
 
         public override void OnLevelUp(GamePlayer player, int previousLevel)
         {
-            base.OnLevelUp(player, previousLevel);
-
             player.RemoveSpellLine("Darkness");
             player.RemoveSpellLine("Suppression");
             player.RemoveSpecialization(Specs.Darkness);
@@ -79,12 +77,18 @@ namespace DOL.GS.PlayerClass
             player.AddSpecialization(SkillBase.GetSpecialization(AIR_SPEC));
             player.AddSpecialization(SkillBase.GetSpecialization(EARTH_SPEC));
 
+            player.AddAbility(SkillBase.GetAbility(Abilities.Sprint));
+            player.AddAbility(SkillBase.GetAbility(Abilities.MidArmor, ArmorLevel.Leather));
+            player.AddAbility(SkillBase.GetAbility(Abilities.Weapon_Staves));
+
             // Spell lines
             player.AddSpellLine(SkillBase.GetSpellLine("Gift of Flame"));
             player.AddSpellLine(SkillBase.GetSpellLine("Air Manipulation"));
             player.AddSpellLine(SkillBase.GetSpellLine("Manipulate Earth"));
 
             player.AddSpellLine(SkillBase.GetSpellLine("Mattermancery"));
+
+            player.AddAbility(SkillBase.GetAbility(Abilities.Quickcast));
 
             if (player.Level >= 5)
             {
