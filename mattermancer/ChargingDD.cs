@@ -300,10 +300,6 @@ namespace DOL.GS.Spells
 
                     if (!Util.Chance(spellResistChance))
                     {
-                        DealDamage(m_target, m_currentMultiplier);
-                        foreach (GamePlayer witness in m_target.GetPlayersInRadius((ushort)WorldMgr.VISIBILITY_DISTANCE))
-                            witness.Out.SendSpellEffectAnimation(Caster, m_target, Spell.ClientEffect, 0, false, 0x01);
-
                         //If we have any spell elements, proc them.
                         SpellElement se = null; //have to do it this way incase we edit effectlist
                         lock (Caster.EffectList)
@@ -318,6 +314,10 @@ namespace DOL.GS.Spells
                         }
                         if (se != null)
                             se.TryToProc(new CastingEventArgs(this, m_target));
+
+                        DealDamage(m_target, m_currentMultiplier);
+                        foreach (GamePlayer witness in m_target.GetPlayersInRadius((ushort)WorldMgr.VISIBILITY_DISTANCE))
+                            witness.Out.SendSpellEffectAnimation(Caster, m_target, Spell.ClientEffect, 0, false, 0x01);
 
                         //Give a stack of untapped potential!
                         if (m_untappedPotential != null)

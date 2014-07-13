@@ -1,5 +1,6 @@
 ﻿using DOL.GS;
 using DOL.GS.Effects;
+using System.Collections.Generic;
 
 namespace DOL.GS.Spells
 {
@@ -33,6 +34,28 @@ namespace DOL.GS.Spells
         public override bool IsOverwritable(GameSpellEffect compare)
         {
             return (compare.SpellHandler is UntappedPotential);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override IList<string> DelveInfo
+        {
+            get
+            {
+                var list = new List<string>(32);
+
+                list.Add(Spell.Description);
+
+                if (Spell.Damage > 0)
+                    list.Add("This spell increases your stacks of Untapped Potential by " + Spell.Damage + ".");
+
+                if (Spell.Value > 0)
+                    list.Add("This spell cannot be used to increase stacks of Untapped Potential beyond " + Spell.Value + ".");
+
+
+                return list;
+            }
         }
     }
 }

@@ -127,15 +127,25 @@ namespace DOL.GS.Effects
             UntappedPotentialEffect upe = effect as UntappedPotentialEffect;
             if (upe == null)
                 return;
-            
+
             StopTimers();
             //log.Info("Spellhandler.Spell.Duration = " + m_handler.Spell.Duration);
             m_duration = m_handler.Spell.Duration;
             //log.Info("Increased stack to " + StackCount + "!");
             StartTimers();
             m_expired = false;
-            IncreaseStackCount(upe.StackCount);
-            //m_handler.OnEffectStart(this);
-        }        
+
+            //New system: if spell.Damage or spell.Value is not zero, then these amounts are respectively the number of UP to add and the maximum number we can increase to.
+            int toAdd = 1;
+            if (effect.Spell.Damage > 0)
+                toAdd = (int)effect.Spell.Damage;
+
+            //cap the number we can reach.
+            if (effect.Spell.Value > 0)
+                toAdd = (int)Math.Min(effect.Spell.Value - StackCount, toAdd);
+
+            if (toAdd > 0)
+                IncreaseStackCount(toAdd);
+        }
     }
 }
