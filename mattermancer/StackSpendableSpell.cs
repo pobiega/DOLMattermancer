@@ -101,7 +101,9 @@ namespace DOL.GS.Spells
             UntappedPotentialEffect gs = null;
             lock (Caster.EffectList)
             {
-                foreach (GameSpellEffect gse in Caster.EffectList)
+                foreach (IGameEffect ge in Caster.EffectList)
+                {
+                    GameSpellEffect gse = ge as GameSpellEffect;
                     if (gse != null)
                     {
                         if (gse is UntappedPotentialEffect)
@@ -110,6 +112,7 @@ namespace DOL.GS.Spells
                             break;
                         }
                     }
+                }
             }
 
             if (gs == null)
