@@ -27,8 +27,8 @@ namespace DOL.GS.Spells
 
         public override bool IsNewEffectBetter(GameSpellEffect oldeffect, GameSpellEffect neweffect)
         {
-            //Untapped potential overwrites itself always
-            return oldeffect.Spell.ID == neweffect.Spell.ID;
+            //Untapped potential overwrites itself always, regardless of if its actually any better
+            return oldeffect.Spell.SpellType == neweffect.Spell.SpellType;
         }
 
         public override bool IsOverwritable(GameSpellEffect compare)
