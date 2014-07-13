@@ -70,9 +70,19 @@ namespace DOL.GS.Effects
         public UntappedPotentialEffect(ISpellHandler handler, int duration, int pulseFreq)
             : this(handler, duration, pulseFreq, 1)
         {
+            int startingStackCount = 1;
+
+            if (handler.Spell.Damage > 0)
+            startingStackCount = (int)handler.Spell.Damage;
+
+            if (handler.Spell.Value > 0)
+                startingStackCount = (int)Math.Min(startingStackCount, handler.Spell.Value);
+
+            m_stackCount = startingStackCount;
+
         }
 
-        protected int m_stackCount = 1;
+        protected int m_stackCount;
 
         public int StackCount
         {
