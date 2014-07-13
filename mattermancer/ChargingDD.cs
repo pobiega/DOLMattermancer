@@ -308,8 +308,9 @@ namespace DOL.GS.Spells
                         SpellElement se = null; //have to do it this way incase we edit effectlist
                         lock (Caster.EffectList)
                         {
-                            foreach (GameSpellEffect gse in Caster.EffectList)
+                            foreach (IGameEffect ge in Caster.EffectList)
                             {
+                                GameSpellEffect gse = ge as GameSpellEffect;
                                 se = gse.SpellHandler as SpellElement;
                                 if (se != null)
                                     break;
