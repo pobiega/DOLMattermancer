@@ -27,7 +27,7 @@ namespace DOL.GS.Spells
 
         protected override GameSpellEffect CreateSpellEffect(GameLiving target, double effectiveness)
         {
-            return new StackingSpellEffect(this, m_spell.Duration, m_spell.Frequency, effectiveness);
+            return new StackingDoTSpellEffect(this, m_spell.Duration, m_spell.Frequency, effectiveness);
         }
 
         public override AttackData CalculateDamageToTarget(GameLiving target, double effectiveness)
@@ -37,6 +37,12 @@ namespace DOL.GS.Spells
             ad.Damage *= StackCount;
 
             return ad;
+        }
+
+        public override bool IsNewEffectBetter(DOL.GS.Effects.GameSpellEffect oldeffect, DOL.GS.Effects.GameSpellEffect neweffect)
+        {
+            //this might look weird, but we handle this in the effect
+            return true;
         }
     }
 }

@@ -6,7 +6,7 @@ using log4net;
 
 namespace DOL.GS.Effects
 {
-    public class StackingSpellEffect : GameSpellEffect
+    public class StackingDoTSpellEffect : GameSpellEffect
     {
         /// <summary>
         /// Defines a logger for this class.
@@ -15,7 +15,7 @@ namespace DOL.GS.Effects
 
         private readonly object m_LockObject = new object(); // dummy object for thread sync - Mannen
 
-        public StackingSpellEffect(ISpellHandler handler, int duration, int pulseFreq, double effectiveness)
+        public StackingDoTSpellEffect(ISpellHandler handler, int duration, int pulseFreq, double effectiveness)
             : base(handler,duration,pulseFreq,effectiveness)
         {
         }
@@ -26,7 +26,7 @@ namespace DOL.GS.Effects
 		/// <param name="handler">the spell handler</param>
 		/// <param name="duration">the spell duration in milliseconds</param>
 		/// <param name="pulseFreq">the pulse frequency in milliseconds</param>
-        public StackingSpellEffect(ISpellHandler handler, int duration, int pulseFreq)
+        public StackingDoTSpellEffect(ISpellHandler handler, int duration, int pulseFreq)
             : this(handler, duration, pulseFreq, 1)
 		{
 		}
@@ -35,7 +35,7 @@ namespace DOL.GS.Effects
 
         public override void Overwrite(GameSpellEffect effect)
         {
-            StackingSpellEffect sdotEffect = effect as StackingSpellEffect;
+            StackingDoTSpellEffect sdotEffect = effect as StackingDoTSpellEffect;
             if (sdotEffect == null)
                 return;
 
